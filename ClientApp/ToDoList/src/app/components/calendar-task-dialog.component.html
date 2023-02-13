@@ -1,0 +1,46 @@
+<div mat-dialog-title>{{data.task ? ('updatingTask' | translate) : ('newTask' | translate)}}</div>
+<form [formGroup]="taskForm" (ngSubmit)="save()">
+  <div mat-dialog-content class="flex-col">
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{'day' | translate}}</mat-label>
+      <input matInput [matDatepicker]="dp1" formControlName="day" [placeholder]="'day' | translate" (dateChange)="setMidDay($event, taskForm.get('day')!)">
+      <mat-datepicker-toggle matSuffix [for]="dp1"></mat-datepicker-toggle>
+      <mat-datepicker #dp1></mat-datepicker>
+      <mat-hint *ngIf="showErr && taskForm.get('day')?.invalid">{{'fieldRequired' | translate}}</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{'state' | translate}}</mat-label>
+      <mat-select formControlName="state">
+        <mat-option *ngFor="let state of states" [value]="state.key">{{state.key | dictionaryKey: states | translate}}</mat-option>
+      </mat-select>
+      <mat-hint *ngIf="showErr && taskForm.get('state')?.hasError('required')">{{'fieldRequired' | translate}}</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{'priority' | translate}}</mat-label>
+      <mat-select formControlName="priority">
+        <mat-option *ngFor="let priority of priorities" [value]="priority.key">{{priority.key | dictionaryKey: priorities | translate}}</mat-option>
+      </mat-select>
+      <mat-hint *ngIf="showErr && taskForm.get('priority')?.hasError('required')">{{'fieldRequired' | translate}}</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>{{'description' | translate}}</mat-label>
+      <textarea rows="5" matInput formControlName="description"></textarea>
+      <mat-hint *ngIf="showErr && taskForm.get('description')?.hasError('required')">{{'fieldRequired' | translate}}</mat-hint>
+    </mat-form-field>
+
+  </div>
+
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>{{"cancel" | translate}}</button>
+    <button mat-button type="button" *ngIf="data?.task" (click)="delete()">{{"delete" | translate}}</button>
+    <button mat-button cdkFocusInitial type="submit">{{"confirm" | translate}}</button>
+  </div>
+</form>
+
+<div class="spinner" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>

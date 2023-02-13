@@ -1,0 +1,113 @@
+<div class="base-panel">
+  <div class="search-panel">
+
+    <div class="search-panel-body" (keyup.enter)="search()">
+      <form [formGroup]="searchForm" class="search-form">
+
+        <mat-form-field appearance="outline" style="display: none">
+          <mat-date-range-input [formGroup]="searchForm">
+            <input matStartDate formControlName="from">
+            <input matEndDate formControlName="to">
+          </mat-date-range-input>
+        </mat-form-field>
+        <mat-calendar [(selected)]="selectedDateRange" (selectedChange)="setDateRange($event)"></mat-calendar>
+        <hr>
+
+        <div class="chips">
+          <div class="title">{{'state' | translate}}</div>
+          <mat-chip-list multiple>
+            <mat-chip *ngFor="let s of states" [selected]="searchForm.get('states')?.value.includes(s.key)"
+              (click)="toggleChip(s.key, searchForm.get('states')!)"
+              [ngClass]="{'todo': s.key == 0, 'doing': s.key == 1, 'done': s.key == 2}">
+              {{s.key | dictionaryKey: states | translate}}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+
+        <div class="chips">
+          <div class="title">{{'priority' | translate}}</div>
+          <mat-chip-list multiple>
+            <mat-chip *ngFor="let p of priorities" [selected]="searchForm.get('priorities')?.value.includes(p.key)"
+              (click)="toggleChip(p.key, searchForm.get('priorities')!)"
+              [ngClass]="{'low': p.key == 0, 'middle': p.key == 1, 'heigth': p.key == 2}">
+              {{p.key | dictionaryKey: priorities | translate}}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="search-panel-footer btn-bar">
+      <div class="two-btns">
+        <button bar-btn="reset" (click)="reset()">{{'clear' | translate}}</button>
+        <button bar-btn="submit" (click)="search()">{{'search' | translate}}</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="inner-panel">
+
+    <div class="panel-bar">
+      <div class="panel-tittle">
+        <mat-icon>calendar_month</mat-icon>
+        <span>{{'calendar' | translate}}</span>
+      </div>
+      <div class="panel-options">
+        <span class="item">
+          <button mat-mini-fab (click)="previousPeroid()" [matTooltip]="'previousPeroid' | translate">
+            <mat-icon>chevron_left</mat-icon>
+          </button>
+        </span>
+        <span class="item">
+          <button mat-mini-fab (click)="nextPeroid()" [matTooltip]="'nextPeroid' | translate">
+            <mat-icon>chevron_right</mat-icon>
+          </button>
+        </span>
+        <span class="item">
+          <button mat-mini-fab (click)="openTask()" [matTooltip]="'newTask' | translate">
+            <mat-icon>add</mat-icon>
+          </button>
+        </span>
+
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div class="col" *ngFor="let d of tasksPerDay">
+        <div class="day">
+          <div class="day-header">
+            <span class="me-auto">{{ d.day| date: 'dd.MM.yyyy, ' }} {{'week_day_short_' + d.dayName | translate }}</span>
+            <button mat-icon-button (click)="openTask(null, d.day)"><mat-icon>add_circle</mat-icon></button>
+          </div>
+
+          <div class="day-content">
+            <div class="task" *ngFor="let t of d.tasks" [ngClass]="{'todo': t.state == 0, 'doing': t.state == 1, 'done': t.state == 2}" (click)="openTask(t)">
+
+              <div class="task-header">
+                <div class="label" [ngClass]="{'todo': t.state == 0, 'doing': t.state == 1, 'done': t.state == 2}">
+                  {{t.state | dictionaryKey: states | translate}}
+                </div>
+                <div class="label" [ngClass]="{'low': t.priority == 0, 'middle': t.priority == 1, 'heigth': t.priority == 2}">
+                  {{t.priority | dictionaryKey: priorities | translate}}
+                </div>
+              </div>
+
+              <div>
+                <mat-icon inline class="icon-ligth">description</mat-icon>&nbsp;{{t.description? t.description : ('noDesription' | translate) }}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+<div class="spinner" *ngIf="isLoading">
+  <mat-spinner></mat-spinner>
+</div>
