@@ -42,7 +42,6 @@ import { MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapte
     { provide: MAT_DATE_LOCALE, useValue: 'pl-PL' },
     { provide: LOCALE_ID, useValue: 'pl' },
     { provide: MAT_MOMENT_DATE_ADAPTER_OPTIONS, useValue: { useUtc: true } },
-    { provide: LocationStrategy, useClass: HashLocationStrategy },
     DatePipe
   ],
   bootstrap: [AppComponent]

@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32319.34
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoListApi", "ToDoListApi.csproj", "{AAFC007A-4035-4723-8AB7-340E63AE069F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoListApi", "ToDoListApi.csproj", "{AAFC007A-4035-4723-8AB7-340E63AE069F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Data", "..\Data\Data.csproj", "{9A591CB4-19CB-4DA1-95AD-613B7C2BBE90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "..\Data\Data.csproj", "{9A591CB4-19CB-4DA1-95AD-613B7C2BBE90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Migrations", "..\Migrations\Migrations.csproj", "{C474814B-CDA2-479C-B2A0-63CE8DAE5DAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Migrations", "..\Migrations\Migrations.csproj", "{C474814B-CDA2-479C-B2A0-63CE8DAE5DAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "..\Models\Models.csproj", "{B0CFF26E-B8F3-4788-9935-D01F0B09702D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Models", "..\Models\Models.csproj", "{B0CFF26E-B8F3-4788-9935-D01F0B09702D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "..\Common\Common.csproj", "{08E3FE4B-2216-4728-B270-FD705E21E7B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "..\Common\Common.csproj", "{08E3FE4B-2216-4728-B270-FD705E21E7B3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "..\IntegrationTests\IntegrationTests.csproj", "{E1220FF2-B32C-4F77-9D37-6E381F23EC8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{08E3FE4B-2216-4728-B270-FD705E21E7B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08E3FE4B-2216-4728-B270-FD705E21E7B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08E3FE4B-2216-4728-B270-FD705E21E7B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E1220FF2-B32C-4F77-9D37-6E381F23EC8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1220FF2-B32C-4F77-9D37-6E381F23EC8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1220FF2-B32C-4F77-9D37-6E381F23EC8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1220FF2-B32C-4F77-9D37-6E381F23EC8E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

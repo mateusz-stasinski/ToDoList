@@ -22,14 +22,15 @@ namespace ToDoListApi.Controllers
     [HttpPost("find")]
     public async Task<ActionResult<List<TasksPerDay>>> GetTeamTasks([FromBody] JsonElement search)
     {
-      var isStartDateValid = DateTime.TryParse(search.GetProperty("from").GetString(), out DateTime startDate);
-      var isEndDateValid = DateTime.TryParse(search.GetProperty("to").GetString(), out DateTime endDate);
-      if (!isStartDateValid || !isEndDateValid)
+      List<TasksPerDay> tasksPerDay;
+      try
       {
-        return BadRequest("arguments-from-and-to-are-required");
+        tasksPerDay = await _tasks.GetTeamTasks(search);
       }
-
-      var tasksPerDay = await _tasks.GetTeamTasks(search, endDate, startDate);
+      catch (Exception ex)
+      {
+        return BadRequest(ex.Message);
+      }
 
       return Ok(tasksPerDay);
     }
@@ -50,9 +51,9 @@ namespace ToDoListApi.Controllers
       {
         result = await _tasks.UpdateTask(request);
       }
-      catch
+      catch (Exception ex)
       {
-          return NotFound("task_not_found");
+          return NotFound(ex.Message);
       }
 
       return Ok(result);
@@ -65,9 +66,9 @@ namespace ToDoListApi.Controllers
       {
        await _tasks.DeleteTask(id);
       }
-      catch
+      catch (Exception ex)
       {
-        return NotFound("task_not_found");
+        return NotFound(ex.Message);
       }
 
       return NoContent();

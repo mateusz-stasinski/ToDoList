@@ -16,8 +16,15 @@ namespace ToDoListApi.Services
       _context = context;
     }
 
-    public async Task<List<TasksPerDay>> GetTeamTasks(JsonElement search, DateTime endDate, DateTime startDate)
+    public async Task<List<TasksPerDay>> GetTeamTasks(JsonElement search)
     {
+      var isStartDateValid = DateTime.TryParse(search.GetProperty("from").GetString(), out DateTime startDate);
+      var isEndDateValid = DateTime.TryParse(search.GetProperty("to").GetString(), out DateTime endDate);
+      if (!isStartDateValid || !isEndDateValid)
+      {
+        throw new InvalidOperationException("arguments-from-and-to-are-required");
+      }
+
       var tasks = _context.ToDoTask.AsQueryable();
       var query = BuildSearchClause(search, tasks);
       var result = await query.ToListAsync();
