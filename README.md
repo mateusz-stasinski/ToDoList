@@ -8,4 +8,4 @@ Ay uruchomić aplikację należy:
 5. Uruchomić konsolę w katalogu "...\ToDoList\ClientApp\ToDoList" i wykonać polecenie: npm install
 6. Następnie wykonać polecenie: ng sevre --open
 
-Powinno uruchmić się okno przeglądarki pod adresem http://localhost:4200/
+Powinna uruchmić się okno przeglądarki pod adresem http://localhost:4200/
